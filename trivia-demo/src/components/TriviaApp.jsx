@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const TriviaApp = () => {
   const [questions, setQuestions] = useState(null);
+  const [answerVisibility, setAnswerVisibility] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +18,17 @@ const TriviaApp = () => {
     fetchData();
   }, []);
 
+  const toggleAnswerVisibility = index => {
+    setAnswerVisibility(prevState => ({
+      ...prevState,
+      [index]: !prevState[index]
+    }));
+  };
+
+  const handleClick = () => {
+    setAnswerVisibility(!answerVisibility);
+  };
+
   return (
     <div>
       <h1>Trivia App</h1>
@@ -27,10 +39,11 @@ const TriviaApp = () => {
             <div>
               <button>{question.correct_answer}</button>
             </div>
-            {question.incorrect_answers.map((answer, index) => (
+            {question.incorrect_answers.map((answer, answerIndex) => (
               <>
-              <div>
-                <button key={index}>{answer}</button>
+              <div key={answerIndex}>
+                  <button className={answerVisibility[index] ? "incorrect-button-hide" : "incorrect-button-show"}
+                    onClick={() => toggleAnswerVisibility(index)}>{answer}</button>
               </div>
               </>
             ))}
