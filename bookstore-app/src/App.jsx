@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Genres from './components/Genres'
+import BookStore from './components/BookStore'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,29 +23,20 @@ function App() {
     {"title": "Where the Wild Things Are", "author": "Maurice Sendak", "price": 8.00}
   ]
   };
+
   
-  const genres = ["fiction", "non-fiction", "children"];
-
-
   return (
     <>
       <div>
-        <h1>Online Bookstore</h1>
+        <h1 className='title'>Online Bookstore</h1>
       </div>
 
-      <Genres/>
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className='genres'>
+        <Genres/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <BookStore bookData={bookData}/>
+      
       </>
   )
 }

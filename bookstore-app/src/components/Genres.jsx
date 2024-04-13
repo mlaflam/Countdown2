@@ -1,10 +1,22 @@
 import React from 'react';
+import { useState } from 'react';
 
 const Genres = () => {
   const genres = ["fiction", "non-fiction", "children"];
+  const [clickedGenres, setClickedGenres] = useState({});
+
+  function handleClick(genre) {
+    setClickedGenres(prevState => ({
+      ...prevState,
+      [genre]: !prevState[genre]
+
+    }))
+  }
 
   const genreButtons = genres.map(genre => (
-    <button key={genre}>Hide {genre}</button>
+    <button onClick={() => handleClick(genre)} className="genre-button" key={genre}>
+      {clickedGenres[genre] ? `Display ${genre}`: `Hide ${genre}`}
+    </button>
   ));
 
   return (
